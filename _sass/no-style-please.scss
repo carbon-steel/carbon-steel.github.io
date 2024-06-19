@@ -20,7 +20,7 @@ body[a="dark"] { @include dark-appearance; }
   font-family: 'Work Sans';
   src:
     url(/assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf);
-  font-variation-settings: 'wght' 375;
+  font-weight: 375 425;
   font-style: normal;
   font-display: swap;
 }
