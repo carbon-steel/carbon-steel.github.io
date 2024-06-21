@@ -52,8 +52,8 @@ Examples of abstraction:
     - Time dilation slightly changes each person/object's flow of time based on
       their speed and how much gravity they're under.
     - GPS satellites orbiting the Earth have to adjust their clocks by 7
-      microseconds per day to account for time dilation. 
-    - [Source](https://pilotswhoaskwhy.com/2021/03/14/gnss-vs-time-dilation-what-the/)
+      microseconds per day to account for time dilation
+      ([Source](https://pilotswhoaskwhy.com/2021/03/14/gnss-vs-time-dilation-what-the/)).
 
 ---
 
