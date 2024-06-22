@@ -45,13 +45,14 @@ Examples of abstraction:
 * We perceive a group of trees as a single forest.
 * We think of our bank balance as money that the bank stores for us.
     - In reality, the bank does not just store the money we deposit. It loans
-      away/invests most of the money that people deposit.
+      away/invests most of the money that people deposit. Our money does _not_
+      sit idle in a large pile in a vault.
     - Our bank balance is really just a ledger of how much money we're supposed
       to be able to withdraw.
 * We always assume time passes at the same rate for everyone.
     - Time dilation slightly changes each person/object's flow of time based on
       their speed and how much gravity they're under.
-    - GPS satellites orbiting the Earth have to adjust their clocks by 7
+    - GPS satellites orbiting the Earth have to adjust their clocks by ~38
       microseconds per day to account for time dilation
       ([Source](https://pilotswhoaskwhy.com/2021/03/14/gnss-vs-time-dilation-what-the/)).
 
@@ -64,7 +65,7 @@ Their perspective of the car can be boiled down to:
 * Accelerator makes car go
 * Brake makes car stop
 * Wheel turns car
-* Car needs gas
+* Car needs gas/diesel
 
 Knowing the above abstraction makes it unnecessary to understand the inner
 workings of car engines. Most drivers have only this working knowledge of cars
@@ -79,11 +80,11 @@ operate computers without understanding their inner workings.
   - OS-level details: call stack management, memory management, ...
 * **Portability**: Languages abstract away the need to concern ourselves with the
   differences between different machines.
-  - Any compiled Java program (eg, a jar file) should be able to run on any
+  - Any compiled Java program (eg, a jar file) _should be_ able to run on any
     machine that has a Java Runtime Environment (ie, JVM) on it.
-  - A Python script should be able to run on any machine with a Python
+  - A Python script _should be_ able to run on any machine with a Python
     interpreter.
-  - A C program should be able to compile and run on any machine if the machine
+  - A C program _should be_ able to compile and run on any machine if the machine
     has a C compiler.
 
 # Abstractions fail
@@ -111,13 +112,14 @@ Which is similar to the maxim from statistics:
 
 When we write code, we use leaky abstractions all the time. Here are some random
 examples:
-* Garbage collection takes the burden of worrying about memory management
+* Garbage collection takes away the burden of worrying about memory management
   (unless we care about latency jitters)
-* C++ smart pointers make memory safe (as long as you don't store any raw pointers from it)
+* C++ smart pointers make memory safe (as long as you don't store any raw
+  pointers from it)
 * Hashtables are fast because they have O(1) operations (but arrays are faster
   for smaller sizes).
 * Passing by reference is faster than passing by value (except for cases of copy
-  elision and values which fit in registers)
+  elision and values which fit in CPU registers like ints)
 
 Fortunately, many leaky abstractions crash your code when they fail, so they're
 easy to address. However, some may just produce undefined behavior or
@@ -130,12 +132,11 @@ without abstractions (to know cars as they _really_ are)? No. When you dig
 beneath abstractions, you just find more abstractions. It's turtles all the way
 down.
 
-* Underpinning our abstraction of cars, there is an understanding 
-  of each component's purpose.
+* Underpinning our abstraction of cars, there is an understanding of each
+  component's purpose.
 * Beneath that, the chemistry of combustion and the mechanical engineering of
   the engine
-* Beneath that, the mathematics/physics that model the forces of our
-  universe
+* Beneath that, the mathematics/physics that model the forces of our universe
 
 These layers of abstractions go down until we hit our most basic axioms about
 logic and reality.
@@ -148,7 +149,7 @@ everything and everyone, including ourselves.
 
 A programmer should have a "trust, but verify" policy.
 
-Examples of what I mean:
+Here are some examples:
 * Trust the information that people tell you, but verify it with what the
   documentation says
 * Test your beliefs by trying to disprove them.
@@ -162,8 +163,8 @@ Examples of what I mean:
       utilization. Check to make sure your service is not just handling fewer
       requests at the moment.
     - You've submitted a code change and you see no problems in the service the
-      next day. Did your code get rolled out without issues or was the rollout
-      skipped that day?
+      next day. Check to make sure a rollout occurred that day and your code was
+      included in it.
 * Always measure impact when optimizing code. Code changes that appear to be
   "theoretically" faster can end up being slower due to factors revealed in
   lower layers of abstraction.
@@ -171,7 +172,8 @@ Examples of what I mean:
 # Beware of unknown unknowns
 
 The scariest epistemological issue for programmers is the "unknown unknown".
-There are
+
+There are...
 * things you know (ie, "knowns")
 * things you know you don't know ("known unknowns")
 * things you don't even know that you don't know ("unknown unknowns")
@@ -185,7 +187,10 @@ You may have never heard of...
       be hacked via SQL injections.
 * Character encodings
     - Any text data your code processes must be using the character encoding
-      (eg, ASCII, Unicode, UTF-32, etc) your code expects/supports.
+      (eg, ASCII, UTF-8, UTF-32, etc) your code expects/supports.
+    - Random access of a character in a text buffer could take constant
+      time (for ASCII) or linear time (for UTF-8) depending on the character
+      encoding.
     - You may output incomprehensible characters if you try to read text data
       using the wrong character encoding.
 * Java heap size
@@ -193,8 +198,8 @@ You may have never heard of...
     - You could fix this issue if you knew to configure a larger max heap size
       for your Java program.
 
-If you have not heard of these topics before, you would not even know to be
-worried about their pitfalls.
+If you have not heard of these topics before, you may not even know that you
+fell into their pitfalls.
 
 There is no sure fire way to catch unknown unknowns when they are around but we
 should check under at least one layer of abstraction to look for them.
@@ -205,11 +210,16 @@ surprised by abstraction failures.
 When learning/working with an unfamiliar platform/language/tool/library/technology:
 * Read more documentation than just the bare minimum you need
 * Watch videos
-    - Conference presentations have the highest content quality in my experience
+    - Conference presentations have the highest quality in my experience
+* Read blog posts
 * Read the source code
+* Grow your understanding of abstractions you have to work with
+    - Learn about features recently added in to your programming language
+    - Read through all of the public functions of libraries, not just the ones
+      you're using
+    - Skim through all of the flags of a CLI tool's man page
 * Learn at least one layer of abstraction lower than you need
-    - If you're working in C++, learn a bit about the compiler and your OS's
-      process execution
+    - Learn about your compiler's optimizations
     - If you're running a service, learn about your orchestration platform (ex:
       kubernetes)
     - If you're working in Java, learn about the JVM
@@ -220,7 +230,7 @@ When learning/working with an unfamiliar platform/language/tool/library/technolo
 Abstractions are necessary as they allow us to think efficiently but they are
 treacherous as they can make it appear that we know "enough". Programmers who
 learn superficially will not succeed on difficult projects that come without
-known solutions and involve mulitple domains of expertise.
+known solutions and involve multiple domains of expertise.
 
 That said, the ideal put forth by this blog post needs to be balanced against
 reality. Obviously, we can't take time to learn every little thing when we're
