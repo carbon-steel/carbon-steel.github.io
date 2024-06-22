@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Roger Roger
-author: Sung Jin Kim
+title: Deep Roots
+author: Sung Kim
 email: 
-description: The digitization of a coffee-addled mind.
+description: The archival of the coffee-addled mind.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: # the base hostname & protocol for your site, e.g. http://example.com
 github_username: carbon-steel
