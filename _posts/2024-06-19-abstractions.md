@@ -16,7 +16,7 @@ Writing code correctly is hard and verifying code correctness is impossible.
 Here are some reasons why:
 * **Generality**: Even if your code behaves correctly once, will it do so for
   all cases, for all machines, for all times?
-* **False positives**: Failing tests indicate the presence of bugs, but passing
+* **False Pass**: Failing tests indicate the presence of bugs, but passing
   tests do not promise their absence.
 * **Lack of certainty**: You could write a formal proof for your code's
   correctness but now you must wonder if the proof is correct. You would need to
@@ -34,33 +34,39 @@ comes up frequently among programmers: _abstractions_.
 
 Abstractions are...
 * mental models of how stuff works
-* the result of data compression (could be either lossy or lossless) that occurs in your brain
+* when we treat `thing A` **as if** it were `thing B`
+* metaphorically...
+    - the result of the data compression that occurs in your brain
+    - seeing the forest for the trees
 * used all the time in day-to-day life
 
-> The word "abstractions" has many meanings. In programming, it can also refer
+
+> The word "abstraction" has many meanings. In programming, it can also refer
 > to layers of code that hide complexity. This post will only be talking about
 > abstractions in the cognitive sense.
 
 Examples of abstraction:
-* We perceive a group of trees as a single forest.
-* We think of our bank balance as money that the bank stores for us.
+* We treat our bank deposits **as if** the bank simply stores that money for us.
     - In reality, the bank does not just store the money we deposit. It loans
       away/invests most of the money that people deposit. Our money does _not_
       sit idle in a large pile in a vault.
-    - Our bank balance is really just a ledger of how much money we're supposed
-      to be able to withdraw.
-* We always assume time passes at the same rate for everyone.
+    - The abstraction works because banks still keep enough cash on hand to
+      handle most withdrawals.
+* We treat time **as if** it passes at the same rate for everyone.
     - Time dilation slightly changes each person/object's flow of time based on
       their speed and how much gravity they're under.
     - GPS satellites orbiting the Earth have to adjust their clocks by ~38
       microseconds per day to account for time dilation
       ([Source](https://pilotswhoaskwhy.com/2021/03/14/gnss-vs-time-dilation-what-the/)).
+    - The abstraction works because the effect of time dilation is too miniscule
+      to notice unless you are doing extremely precise engineering.
 
 ---
 
-One way to form abstractions is by removing unnecessary details. For example,
-most people that drive do not know much about the inner workings of their car.
-Their perspective of the car can be boiled down to:
+One way to form abstractions is by removing details (creating a simplified view
+of something complex). For example, most people that drive do not know much about
+the inner workings of their car. Their perspective of the car can be boiled down
+to:
 * Ignition turns on car
 * Accelerator makes car go
 * Brake makes car stop

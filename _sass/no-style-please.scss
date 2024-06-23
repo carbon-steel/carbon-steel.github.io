@@ -20,7 +20,7 @@ body[a="dark"] { @include dark-appearance; }
   font-family: 'Work Sans';
   src:
     url(/assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf);
-  font-weight: 375 425;
+  font-weight: 375 500;
   font-style: normal;
   font-display: swap;
 }
@@ -98,7 +98,7 @@ table, th, td {
 code {
   /*color: white;*/
   background-color: rgba(255, 255, 255, 0.5);
-  font-size: 10px;
+  font-size: 13px;
   font: monospace;
   font-style: italic;
 }
